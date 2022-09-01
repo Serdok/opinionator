@@ -1,0 +1,19 @@
+# Build artefacts
+node_modules/
+*.lock
+.env
+coverage/
+coverage.json
+
+# Hardhat files
+cache/
+artifacts/
+typechain/
+typechain-types/
+deployments/
+
+# Runtime files
+proposals.json
+
+# IDE
+.idea/
