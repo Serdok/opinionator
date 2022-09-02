@@ -16,7 +16,8 @@ const config = {
 		files: {
 			assets: 'static',
 			routes: 'src/routes',
-			appTemplate: 'src/app.html'
+			appTemplate: 'src/app.html',
+			lib: 'src/lib'
 		},
 		moduleExtensions: ['.ts'],
 		paths: {
