@@ -1,6 +1,7 @@
 <script lang="ts">
-	import Accounts from './Accounts.svelte';
 	import { onMount } from 'svelte';
+	import Accounts from '$lib/Accounts.svelte';
+	import FloatingMessage from '$lib/FloatingMessage.svelte';
 	import type { Account, EthereumProvider } from '$lib/types';
 
 	import detectEthereumProvider from '@metamask/detect-provider';
@@ -9,6 +10,7 @@
 
 	let accounts: Array<Account> = [];
 	let account: Account = undefined;
+	let err: string | undefined = undefined;
 
 	$: if (accounts.length === 0) account = undefined;
 
@@ -41,9 +43,13 @@
 	};
 
 	const connect = async () => {
-		const provider = (await detectEthereumProvider()) as EthereumProvider;
+		try {
+			const provider = (await detectEthereumProvider()) as EthereumProvider;
 
-		await provider.request({ method: 'eth_requestAccounts' }) as Array<Account>;
+			await provider.request({ method: 'eth_requestAccounts' }) as Array<Account>;
+		} catch (er) {
+			err = serializeError(er).message;
+		}
 	};
 
 	onMount(async () => {
@@ -54,5 +60,9 @@
 </script>
 
 <Accounts {accounts} on:connect={connect} on:accountSelected={e => account = e.detail.selected}/>
+
+{#if err}
+	<FloatingMessage message={err} />
+{/if}
 
 <slot />
