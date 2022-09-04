@@ -6,7 +6,6 @@
 
 	import detectEthereumProvider from '@metamask/detect-provider';
 	import { serializeError } from 'eth-rpc-errors';
-	import '../app.postcss';
 
 	let accounts: Array<Account> = [];
 	let account: Account = undefined;
@@ -66,3 +65,5 @@
 {/if}
 
 <slot />
+
+<style src='../app.sass'></style>

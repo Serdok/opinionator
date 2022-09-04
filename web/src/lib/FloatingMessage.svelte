@@ -12,7 +12,3 @@
 {#if visible}
     <div in:fly="{{ y: 50, duration: 1000, }}" out:fly="{{ y: 50, duration: 1000, }}">{message}</div>
 {/if}
-
-<style>
-
-</style>
